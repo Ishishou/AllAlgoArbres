@@ -133,3 +133,10 @@ int est_HG_Aux(Arbre arbre, int* n){
     *n = ng + nd + 1;
     return rg && rd && (ng >= nd);
 }
+//gestion d'un arbre
+Arbre recherche(Arbre a, int n){
+    if(a == NULL) return NULL;
+    if(a->valeur == n) return a;
+    else if(a->valeur > n) return recherche(a->fg, n);
+    else return recherche(a->fd, n);
+}

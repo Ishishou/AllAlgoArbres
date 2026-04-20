@@ -33,5 +33,7 @@ void afficheInfixe(Arbre arbre);
 void afficheSuffixe(Arbre arbre);
 void afficheLargeur(Arbre arbre);
 void affiche_arbre(Arbre a, int profondeur);
+//gestion d'un arbre
+Arbre recherche(Arbre a, int n);
 
 #endif
