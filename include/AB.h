@@ -5,33 +5,33 @@
 #include <stdlib.h>
 #include <assert.h>
 
-typedef struct noeud_avl{
+typedef struct noeud{
     int valeur;
     int balance;
     int hauteur;
-    struct noeud_avl *fd;
-    struct noeud_avl *fg;
-}noeud_avl, *Arbre_avl;
+    struct noeud *fd;
+    struct noeud *fg;
+}noeud, *Arbre;
 
 //création d'arbre
-Arbre_avl alloueNoeudAVL(int val, int hauteur, int balance);
-void genereArbrePrefixe_Aux(FILE* file, Arbre_avl* arbre);
-Arbre_avl genereArbrePrefixe(char* fichier);
+Arbre alloueNoeudAVL(int val, int hauteur, int balance);
+void genereArbrePrefixe_Aux(FILE* file, Arbre* arbre);
+Arbre genereArbrePrefixe(char* fichier);
 //caractéristiques d'un arbre
-int hauteurArbre(Arbre_avl arbre);
-int hauteurNoeud(Arbre_avl arbre);
-int feuilles(Arbre_avl arbre);
-int noeuds(Arbre_avl arbre);
-int noeudsInterne(Arbre_avl arbre);
-int noeudsDeuxFils(Arbre_avl arbre);
+int hauteurArbre(Arbre arbre);
+int hauteurNoeud(Arbre arbre);
+int feuilles(Arbre arbre);
+int noeuds(Arbre arbre);
+int noeudsInterne(Arbre arbre);
+int noeudsDeuxFils(Arbre arbre);
 //vérfication sur un arbre
-int est_HG(Arbre_avl arbre);
-int est_HG_Aux(Arbre_avl arbre, int* n);
+int est_HG(Arbre arbre);
+int est_HG_Aux(Arbre arbre, int* n);
 //affichage
-void affichePrefixe(Arbre_avl arbre);
-void afficheInfixe(Arbre_avl arbre);
-void afficheSuffixe(Arbre_avl arbre);
-void afficheLargeur(Arbre_avl arbre);
-void affiche_arbre(Arbre_avl a, int profondeur);
+void affichePrefixe(Arbre arbre);
+void afficheInfixe(Arbre arbre);
+void afficheSuffixe(Arbre arbre);
+void afficheLargeur(Arbre arbre);
+void affiche_arbre(Arbre a, int profondeur);
 
 #endif
