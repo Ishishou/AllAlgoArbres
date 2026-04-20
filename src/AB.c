@@ -140,3 +140,60 @@ Arbre recherche(Arbre a, int n){
     else if(a->valeur > n) return recherche(a->fg, n);
     else return recherche(a->fd, n);
 }
+void ajout(Arbre *a, int n){
+    if(*a == NULL){
+        *a = alloueNoeudAVL(n, 0, 0);
+        return;
+    }
+    if((*a)->valeur > n) ajout(&(*a)->fg, n);
+    else if ((*a)->valeur <= n) ajout(&(*a)->fd, n);
+}
+Arbre extrait_min(Arbre a){
+    if(a == NULL) return NULL;
+    if(a->fg == NULL) return a;
+    else return extrait_min(a->fg);
+}
+Arbre extrait_max(Arbre a){
+    if(a == NULL) return NULL;
+    if(a->fd == NULL) return a;
+    else return extrait_min(a->fd);
+}
+Arbre extraitSupprime_min(Arbre *a){
+    if(*a == NULL) return NULL;
+    if((*a)->fg == NULL){
+        Arbre min = *a;
+        *a = (*a)->fd;
+        return min;
+    } 
+    return extraitSupprime_min(&(*a)->fg);
+}
+Arbre extraitSupprime_max(Arbre *a){
+    if(*a == NULL) return NULL;
+    if((*a)->fd == NULL){
+        Arbre min = *a;
+        *a = (*a)->fg;
+        return min;
+    } 
+    return extraitSupprime_min(&(*a)->fd);
+}
+Arbre extraitSupprime(Arbre *a, int n){
+    if(*a == NULL) return NULL;
+    else if((*a)->valeur < n) return extraitSupprime(&(*a)->fd, n);
+    else if((*a)->valeur > n) return extraitSupprime(&(*a)->fg, n);
+    else{
+        Arbre tmp = *a;
+        if((*a)->fg == NULL){
+            *a = (*a)->fd;
+        }else if((*a)->fd == NULL){
+            *a = (*a)->fg;
+        }
+        else{
+            Arbre min = extraitSupprime_min(&(*a)->fd);
+            min->fg = tmp->fg;
+            min->fd = tmp->fd;
+            *a = min;
+        }
+        return tmp;
+    }
+}
+

@@ -35,5 +35,11 @@ void afficheLargeur(Arbre arbre);
 void affiche_arbre(Arbre a, int profondeur);
 //gestion d'un arbre
 Arbre recherche(Arbre a, int n);
+void ajout(Arbre *a, int n);
+Arbre extrait_min(Arbre a);
+Arbre extrait_max(Arbre a);
+Arbre extraitSupprime_min(Arbre *a);
+Arbre extraitSupprime_max(Arbre *a);
+Arbre extraitSupprime(Arbre *a, int n);
 
 #endif
