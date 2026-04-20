@@ -2,7 +2,7 @@
 
 int main(int argc, char** argv){
     char file[256] = "arbreComplet.txt";
-    Arbre_avl arbre;
+    Arbre arbre;
     arbre = genereArbrePrefixe(file);
     affichePrefixe(arbre);
     printf("\n");

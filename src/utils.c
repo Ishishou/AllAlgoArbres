@@ -4,7 +4,7 @@ int max(int a, int b){
     return (a > b ? a : b); 
 }
 //pour la fonction afficherLargeur
-void ajouterFile(Arbre_avl arbre, ListeArbre *ptr_lst){
+void ajouterFile(Arbre arbre, ListeArbre *ptr_lst){
     //on crée un noeud indépendant et on l'initialise
     ListeArbre nouveau = malloc(sizeof(*nouveau));
     assert(nouveau != NULL);
@@ -23,13 +23,13 @@ void ajouterFile(Arbre_avl arbre, ListeArbre *ptr_lst){
         temp->suivant = nouveau;
     }
 }
-Arbre_avl sortirFile(ListeArbre *ptr_lst){
+Arbre sortirFile(ListeArbre *ptr_lst){
     //si la liste est vide l'arbre est considéré comme NULL
     if(*ptr_lst == NULL) return NULL;
     //l'arbre à traiter est le premier dans la liste c'est à dire *ptr_lst
     ListeArbre aSupprimer = *ptr_lst;
     //on réccupère la valeur de cet arbre
-    Arbre_avl valeur = aSupprimer->valeur;
+    Arbre valeur = aSupprimer->valeur;
     //on actualise la liste chainé en mettant le prechain à la tête
     *ptr_lst = aSupprimer->suivant;
     //on libère le noeud alloué
