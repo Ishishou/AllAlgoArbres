@@ -133,6 +133,83 @@ int est_HG_Aux(Arbre arbre, int* n){
     *n = ng + nd + 1;
     return rg && rd && (ng >= nd);
 }
+int est_abr_naif(Arbre a, int min, int max){
+    if (!a){
+        return 1;
+    }
+
+    if (a->valeur < min || a->valeur > max){
+        return 0;
+    }
+    return est_abr_naif(a->fg, abr_min(a), abr_max(a)) && est_abr_naif(a->fd, abr_min(a), abr_max(a)); 
+}
+int est_abr_definition_aux(Arbre a, int *min, int *max){
+    if (!a){
+        return 1;
+    }
+
+    int minG, maxG, minD, maxD; //deux cases mémoire vides
+    
+    if (a->fg) {  //sous-arbre gauche
+        if (!est_abr_definition_aux(a->fg, &minG, &maxG)){
+            return 0;
+        }
+        if (maxG >= a->valeur){
+            return 0;
+        }
+    } else {
+        minG = a->valeur;
+    }
+    if (a->fd) {  //sous-arbre droit
+        if (!est_abr_definition_aux(a->fd, &minD, &maxD)){
+            return 0;
+        }
+        if (minD <= a->valeur){
+            return 0;
+        }
+    } else {
+        maxD = a->valeur;
+    }
+
+    if (a->fg) {
+        *min = minG;
+    } else {
+        *min = a->valeur;
+    }
+    if (a->fd) {
+        *max = maxD;
+    } else {
+        *max = a->valeur;
+    }
+    return 1;
+}
+int est_abr_definition(Arbre a){
+    int min, max;
+    return est_abr_definition_aux(a, &min, &max);
+} //renvoie soit 1 ou 0
+int infixe_croissant(Arbre a, Arbre* dernier_noeud){
+    if(!a){
+        return 1;
+    }
+    if(!infixe_croissant(a->fg, dernier_noeud)){
+        return 0;
+    }
+
+    if(*dernier_noeud != NULL && (*dernier_noeud)->valeur > a->valeur){
+        return 0;
+    }
+
+    *dernier_noeud = a;
+
+    if(!infixe_croissant(a->fd, dernier_noeud)){
+        return 0;
+    }
+    return 1;
+}
+int est_abr_infixe(Arbre a, Arbre* dernier_noeud){
+    *dernier_noeud = NULL;
+    return infixe_croissant(a, dernier_noeud);
+} //renvoie soit 1 ou 0
 //gestion d'un arbre
 Arbre recherche(Arbre a, int n){
     if(a == NULL) return NULL;

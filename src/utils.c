@@ -39,3 +39,32 @@ Arbre sortirFile(ListeArbre *ptr_lst){
 int estVideFile(ListeArbre lst){
     return (lst == NULL);
 }
+//fonctions pour récupérer le min et le max
+int abr_min(Arbre a){
+    if (a == NULL){
+        return -1; //si arbre NULL
+    }
+    if (a->fg == NULL){
+        return a->valeur;
+    }
+    return abr_min(a->fg);
+}
+int abr_max(Arbre a){
+    if (a == NULL){
+        return -1;
+    }
+    if (a->fd == NULL){
+        return a->valeur;
+    }
+    return abr_max(a->fd);
+}
+//contrôle technique
+void verifieABR(Arbre arbre){
+    Arbre ptr_arbre = NULL;
+    int a = est_abr_naif(arbre, abr_min(arbre), abr_max(arbre));
+    printf("est arbre naïf : %d\n", a);
+    a = est_abr_definition(arbre);
+    printf("est arbre définition : %d\n", a);
+    a = est_abr_infixe(arbre, &ptr_arbre);
+    printf("est arbre infixe : %d\n", a);
+}
