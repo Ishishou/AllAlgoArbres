@@ -68,3 +68,10 @@ void verifieABR(Arbre arbre){
     a = est_abr_infixe(arbre, &ptr_arbre);
     printf("est arbre infixe : %d\n", a);
 }
+//affichage de tableau
+void afficheTableau(int* tab, int taille){
+    for(int i = 0; i < taille; i++){
+        printf("%d ", tab[i]);
+    }
+    printf("\n");
+}

@@ -21,6 +21,7 @@ Arbre genereArbrePrefixe(char* fichier);
 int hauteurArbre(Arbre arbre);
 int hauteurNoeud(Arbre arbre);
 int feuilles(Arbre arbre);
+int estFeuille(Arbre arbre);
 int noeuds(Arbre arbre);
 int noeudsInterne(Arbre arbre);
 int noeudsDeuxFils(Arbre arbre);
@@ -38,6 +39,8 @@ void afficheInfixe(Arbre arbre);
 void afficheSuffixe(Arbre arbre);
 void afficheLargeur(Arbre arbre);
 void affiche_arbre(Arbre a, int profondeur);
+void affiche_chemins_aux(Arbre a, int buffer[], int indice);
+void affiche_chemins(Arbre a);
 //gestion d'un arbre
 Arbre recherche(Arbre a, int n);
 void ajout(Arbre *a, int n);

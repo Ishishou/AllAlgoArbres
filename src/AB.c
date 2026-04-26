@@ -66,6 +66,10 @@ int noeudsDeuxFils(Arbre arbre){
         return 1 + noeudsInterne(arbre->fg) + noeudsInterne(arbre->fd);
     return noeudsInterne(arbre->fg) + noeudsInterne(arbre->fd);
 }
+int estFeuille(Arbre arbre){
+    if(arbre->fg == NULL && arbre->fd == NULL) return 1;
+    return 0;
+}
 //affichage d'un arbre
 void affichePrefixe(Arbre arbre){
     if(arbre != NULL){
@@ -116,6 +120,25 @@ void affiche_arbre(Arbre a, int profondeur){
 
     // puis le sous-arbre gauche
     affiche_arbre(a->fg, profondeur + 1);
+}
+void affiche_chemins_aux(Arbre a, int buffer[], int indice){
+    if(a == NULL) return;
+    buffer[indice] = a->valeur;
+    if(estFeuille(a)){
+        afficheTableau(buffer, indice + 1);
+        return;
+    }
+    affiche_chemins_aux(a->fg, buffer, indice + 1);
+    affiche_chemins_aux(a->fd, buffer, indice + 1);
+}
+void affiche_chemins(Arbre a){
+    if(a == NULL){
+        printf("nique ta mere\n");
+        return;
+    }
+    int* buffer = malloc(sizeof(int) * noeuds(a));
+    affiche_chemins_aux(a, buffer, 0);
+    free(buffer);
 }
 //vérification sur un arbre
 int est_HG(Arbre arbre){

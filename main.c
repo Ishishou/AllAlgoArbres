@@ -9,6 +9,7 @@ int main(int argc, char** argv){
     affiche_arbre(arbre, 3);
 
     verifieABR(arbre);
-
+    affiche_chemins(arbre);
+    
     return 0;
 }

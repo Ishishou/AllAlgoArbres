@@ -19,5 +19,7 @@ int abr_min(Arbre a);
 int abr_max(Arbre a);
 //contrôle technique
 void verifieABR(Arbre arbre);
+//affichage de tableau
+void afficheTableau(int* tab, int taille);
 
 #endif
