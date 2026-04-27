@@ -3,6 +3,9 @@
 int max(int a, int b){
     return (a > b ? a : b); 
 }
+int min(int a, int b){
+    return (a < b ? a : b); 
+}
 //pour la fonction afficherLargeur
 void ajouterFile(Arbre arbre, ListeArbre *ptr_lst){
     //on crée un noeud indépendant et on l'initialise
@@ -74,4 +77,10 @@ void afficheTableau(int* tab, int taille){
         printf("%d ", tab[i]);
     }
     printf("\n");
+}
+void echange(int* a, int* b){
+    int tmp;
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
 }

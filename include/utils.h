@@ -10,6 +10,7 @@ typedef struct File{
 }File, *ListeArbre;
 
 int max(int a, int b);
+int min(int a, int b);
 //pour la fonction afficheLargeur
 void ajouterFile(Arbre arbre, ListeArbre *ptr_lst);
 Arbre sortirFile(ListeArbre *ptr_lst);
@@ -21,5 +22,7 @@ int abr_max(Arbre a);
 void verifieABR(Arbre arbre);
 //affichage de tableau
 void afficheTableau(int* tab, int taille);
+//enchanger deux entier
+void echange(int* a, int* b);
 
 #endif
