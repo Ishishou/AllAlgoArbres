@@ -1,6 +1,6 @@
 CC = clang
 CFLAGS = -Wall -pedantic -std=c17 -Iinclude
-SRC = main.c src/AB.c src/utils.c 
+SRC = main.c src/AB.c src/utils.c src/AL.c
 EXEC = run
 
 all :
