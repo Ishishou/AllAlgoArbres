@@ -16,8 +16,9 @@ typedef struct{
 int ajoute(Tas *t, int x);
 int est_tas(int tab[], int taille);
 int fils_min_Tas(const Tas *t, int indice);
+int fils_max_Tas(const Tas *t, int indice);
 void change(Tas *t, int indice, int valeur);
-int extrait_min_Tas(Tas *t);
+int extrait_max_Tas(Tas *t);
 void tri_tas(int tab[], int taille);
 int pere(int i);
 int filsG(int i);

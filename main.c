@@ -12,14 +12,17 @@ int main(int argc, char** argv){
     ajoute(&t, 5);
     ajoute(&t, 8);
     ajoute(&t, 1);
+    
     ajoute(&t, 2);
     ajoute(&t, 6);
     ajoute(&t, 7);
     ajoute(&t, 9);
     ajoute(&t, 10);
+    
     printf("%d\n", t.taille);
     afficheTableau(t.arbre, t.taille);
-    int a = fils_min_Tas(&t, 0);
+    int a = extrait_max_Tas(&t);
+    afficheTableau(t.arbre, t.taille);
     printf("%d\n", a);
     return 0;
 }

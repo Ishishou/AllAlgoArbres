@@ -23,9 +23,10 @@ int ajoute(Tas *t, int x){
     parent = pere(enfant);
     t->taille += 1;
     while((enfant > 0) && t->arbre[parent] < t->arbre[enfant]){
+        //percolation ascendante
         echange(&(t->arbre[parent]), &(t->arbre[enfant]));
         enfant = parent;
-        parent = (enfant - 1)/2;
+        parent = pere(enfant);
     }
     return 1;
 }
@@ -41,4 +42,51 @@ int fils_min_Tas(const Tas *t, int indice){
     else if(d >= t->taille) return g;
     else if(t->arbre[g] > t->arbre[d]) return d;
     return g;
+}
+int fils_max_Tas(const Tas *t, int indice){
+    int g = filsG(indice), d = filsD(indice);
+    if(g >= t->taille) return -1;
+    else if(d >= t->taille) return g;
+    else if(t->arbre[g] <= t->arbre[d]) return d;
+    return g;
+}
+void change(Tas *t, int indice, int valeur){
+    if(indice > t->taille - 1) return;
+    int ancienne_valeur = t->arbre[indice];
+    t->arbre[indice] = valeur;
+    if(valeur > ancienne_valeur){
+        //percolation ascendante
+        int enfant, parent;
+        enfant = indice;
+        parent = pere(enfant);
+        while((enfant > 0) && t->arbre[parent] < t->arbre[enfant]){
+            echange(&(t->arbre[parent]), &(t->arbre[enfant]));
+            enfant = parent;
+            parent = pere(enfant);
+        }
+    }else if(valeur < ancienne_valeur){
+        //percolation descendante
+        int i = indice;
+        while(1){
+            int f_max = fils_max_Tas(t, i);
+            if(f_max == -1 || t->arbre[i] >= t->arbre[f_max]) break;
+            echange(&(t->arbre[f_max]), &(t->arbre[i]));
+            i = f_max;
+        }
+    }
+}
+int extrait_max_Tas(Tas *t){
+    if(t->taille == 0) return -1;
+    int max = t->arbre[0];
+    t->arbre[0] = t->arbre[t->taille - 1];
+    t->taille--;
+    //percolation descendante
+    int i = 0;
+    while(1){
+        int f_max = fils_max_Tas(t, i);
+        if(f_max == -1 || t->arbre[i] >= t->arbre[f_max]) break;
+        echange(&(t->arbre[f_max]), &(t->arbre[i]));
+        i = f_max;
+    }
+    return max;
 }
