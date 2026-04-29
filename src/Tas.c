@@ -30,6 +30,21 @@ int ajoute(Tas *t, int x){
     }
     return 1;
 }
+int ajoute_bis(Tas *t, int x){
+    int enfant, parent;
+    if(t->taille == t->capacite) return 0;
+    t->arbre[t->taille] = x;
+    enfant = t->taille;
+    parent = pere(enfant);
+    t->taille += 1;
+    while((enfant > 0) && t->arbre[parent] < t->arbre[enfant]){
+        //percolation ascendante
+        echange(&(t->arbre[parent]), &(t->arbre[enfant]));
+        enfant = parent;
+        parent = pere(enfant);
+    }
+    return 1;
+}
 int est_tas(int tab[], int taille){
     for(int i = 1; i < taille; i++){
         if(tab[i] > tab[pere(i)]) return 0;
@@ -48,6 +63,13 @@ int fils_max_Tas(const Tas *t, int indice){
     if(g >= t->taille) return -1;
     else if(d >= t->taille) return g;
     else if(t->arbre[g] <= t->arbre[d]) return d;
+    return g;
+}
+int fils_max_Tab(int* tab, int indice, int taille){
+    int g = filsG(indice), d = filsD(indice);
+    if(g >= taille) return -1;
+    else if(d >= taille) return g;
+    else if(tab[g] <= tab[d]) return d;
     return g;
 }
 void change(Tas *t, int indice, int valeur){
@@ -89,4 +111,24 @@ int extrait_max_Tas(Tas *t){
         i = f_max;
     }
     return max;
+}
+void tri_tas(int tab[], int taille){
+    Tas t;
+    t.taille = 0;
+    t.capacite = taille;
+    t.arbre = tab;
+    for(int i = 0; i < taille; i++){
+        ajoute_bis(&t, tab[i]);
+    }
+    for(int i = taille - 1; i > 0; i--){
+        echange(&(t.arbre[0]), &(t.arbre[i]));
+        //percolation descendante
+        int indice = 0;
+        while(1){
+            int f_max = fils_max_Tab(t.arbre, indice, i);
+            if(f_max == -1 || t.arbre[indice] >= t.arbre[f_max]) break;
+            echange(&(t.arbre[f_max]), &(t.arbre[indice]));
+            indice = f_max;
+        }
+    }
 }
